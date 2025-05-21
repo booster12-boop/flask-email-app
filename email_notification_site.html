@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Lưu bút điện tử của Huy Trần</title>
+  <style>
+    body {
+      background-color: #b3e5fc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('https://cdn.pixabay.com/photo/2016/03/31/19/57/balloons-1296935_1280.png');
+      background-repeat: no-repeat;
+      background-position: top right;
+      background-size: 200px;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+    }
+
+    h1 {
+      color: #0277bd;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border: 1px solid #90caf9;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0288d1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0277bd;
+    }
+
+    .response-message {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      display: none;
+    }
+
+    .response-message.success {
+      color: #2e7d32;
+      background-color: #c8e6c9;
+    }
+
+    .response-message.error {
+      color: #c62828;
+      background-color: #ffcdd2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Lưu bút điện tử của Huy Trần</h1>
+    <form id="memoryForm">
+      <label for="name">Tên của bạn:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="message">Lưu bút:</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Gửi lời nhắn</button>
+    </form>
+
+    <div id="responseMessage" class="response-message"></div>
+  </div>
+
+  <script>
+    document.getElementById('memoryForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const formData = new FormData(form);
+      const responseDiv = document.getElementById('responseMessage');
+
+      fetch('/send-email', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.text())
+        .then(text => {
+          responseDiv.innerText = text;
+          responseDiv.style.display = 'block';
+          if (text.includes('✅')) {
+            responseDiv.className = 'response-message success';
+            form.reset();
+          } else {
+            responseDiv.className = 'response-message error';
+          }
+        })
+        .catch(error => {
+          responseDiv.innerText = 'Lỗi kết nối với máy chủ!';
+          responseDiv.className = 'response-message error';
+          responseDiv.style.display = 'block';
+        });
+    });
+  </script>
+</body>
+</html>
