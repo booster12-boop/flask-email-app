@@ -13,42 +13,62 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-image: url('https://cdn.pixabay.com/photo/2016/03/31/19/57/balloons-1296935_1280.png');
-      background-repeat: no-repeat;
-      background-position: top right;
-      background-size: 200px;
+      background-image: url('https://cdn.pixabay.com/photo/2016/03/31/19/57/balloons-1296935_1280.png'),
+                        url('https://cdn.pixabay.com/photo/2013/07/12/18/20/cloud-153464_1280.png');
+      background-repeat: no-repeat, no-repeat;
+      background-position: top right, bottom left;
+      background-size: 200px, 150px;
+      overflow: hidden;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
     }
 
     .container {
       background-color: white;
       padding: 30px 40px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
       text-align: center;
       max-width: 600px;
       width: 100%;
       position: relative;
+      border: 4px solid;
+      border-image: linear-gradient(45deg, #81d4fa, #0288d1) 1;
+      animation: float 5s ease-in-out infinite;
     }
 
     h1 {
       color: #0277bd;
       margin-bottom: 20px;
+      font-size: 28px;
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #81d4fa; }
+      to { text-shadow: 0 0 20px #0288d1; }
     }
 
     label {
       display: block;
       margin-top: 15px;
       font-weight: bold;
+      text-align: left;
     }
 
     input[type="text"],
     textarea {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-top: 8px;
       border: 1px solid #90caf9;
-      border-radius: 8px;
+      border-radius: 10px;
       box-sizing: border-box;
+      font-size: 15px;
     }
 
     textarea {
@@ -58,23 +78,25 @@
 
     button {
       margin-top: 20px;
-      padding: 10px 20px;
+      padding: 12px 24px;
       background-color: #0288d1;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       font-size: 16px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     button:hover {
       background-color: #0277bd;
+      transform: scale(1.05);
     }
 
     .response-message {
       margin-top: 20px;
-      padding: 10px;
-      border-radius: 8px;
+      padding: 12px;
+      border-radius: 10px;
       font-weight: bold;
       display: none;
     }
@@ -92,15 +114,15 @@
 </head>
 <body>
   <div class="container">
-    <h1>Lưu bút điện tử của Huy Trần</h1>
+    <h1>🎈 Lưu bút điện tử của Huy Trần 🎓</h1>
     <form id="memoryForm">
-      <label for="name">Tên của bạn:</label>
-      <input type="text" id="name" name="name" required>
+      <label for="name">👤 Tên của bạn:</label>
+      <input type="text" id="name" name="name" required placeholder="Nhập tên bạn...">
 
-      <label for="message">Lưu bút:</label>
-      <textarea id="message" name="message" required></textarea>
+      <label for="message">📝 Lưu bút:</label>
+      <textarea id="message" name="message" required placeholder="Viết lời nhắn dễ thương nào đó cho Huy nhé ✨..."></textarea>
 
-      <button type="submit">Gửi lời nhắn</button>
+      <button type="submit">📨 Gửi lời nhắn</button>
     </form>
 
     <div id="responseMessage" class="response-message"></div>
