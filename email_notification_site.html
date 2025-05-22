@@ -61,8 +61,7 @@
     }
 
     input[type="text"],
-    textarea,
-    input[type="file"] {
+    textarea {
       width: 100%;
       padding: 12px;
       margin-top: 8px;
@@ -116,15 +115,12 @@
 <body>
   <div class="container">
     <h1>🎈 Lưu bút điện tử của Huy Trần 🎓</h1>
-    <form id="memoryForm" enctype="multipart/form-data">
+    <form id="memoryForm">
       <label for="name">👤 Tên của bạn:</label>
       <input type="text" id="name" name="name" required placeholder="Nhập tên bạn...">
 
       <label for="message">📝 Lưu bút:</label>
       <textarea id="message" name="message" required placeholder="Viết lời nhắn dễ thương nào đó cho Huy nhé ✨..."></textarea>
-
-      <label for="image">📷 Chèn ảnh (tùy chọn):</label>
-      <input type="file" id="image" name="image" accept="image/*">
 
       <button type="submit">📨 Gửi lời nhắn</button>
     </form>
@@ -163,4 +159,4 @@
     });
   </script>
 </body>
-</htm
+</html>
